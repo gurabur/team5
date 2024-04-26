@@ -12,7 +12,7 @@ c_Result::~c_Result()
 void c_Result::Init()
 {
 	BreakFlg = false;
-	ResultImgHndl = LoadGraph("");
+	ResultImgHndl = LoadGraph("data/ResultScene/TentativeClearBG");
 }
 void c_Result::Step()
 {
