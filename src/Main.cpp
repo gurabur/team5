@@ -2,6 +2,7 @@
 
 #include "DxLib.h"	//DXライブラリのインクルード
 #include "Common.h"
+#include "scene/scene.h"
 
 // define
 #define	SCREEN_SIZE_X	640	// X方向の画面サイズを指定
@@ -26,7 +27,9 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 	
 	//-----------------------------------------
 	//一番最初に１回だけやる処理をここに書く
-	
+	c_SceneManager cSceneManager;
+	cSceneManager.Init();
+
 	//入力制御初期化
 	InitInput();
 
@@ -52,7 +55,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 		//他のStepより早く呼ぶ
 		StepInput();
 
-
+		cSceneManager.Step();
 
 
 		//-----------------------------------------
@@ -64,7 +67,7 @@ int WINAPI WinMain(HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLine
 
 	//-----------------------------------------
 	//最後に１回だけやる処理をここに書く
-
+	cSceneManager.fin();
 
 	//-----------------------------------------
 	//DXライブラリの後処理

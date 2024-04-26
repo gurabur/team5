@@ -10,4 +10,6 @@ public:
 	static float VecLong(VECTOR vec);
 	static VECTOR VecNormalize(VECTOR vec);
 	static VECTOR VecScale(VECTOR vec, float scale);
+	static float CreateInPro2D(VECTOR vec1, VECTOR vec2);//ƒxƒNƒgƒ‹‚Ì“àÏ‚ğ‹‚ß‚é(2D)
+	static float AngleOfVec(VECTOR vec1, VECTOR vec2);
 };

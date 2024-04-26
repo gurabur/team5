@@ -1,5 +1,7 @@
 #pragma once
 #include "Title/Title.h"
+#include "Play/Play.h"
+#include "Result/Result.h"
 
 class c_SceneManager
 {
@@ -29,4 +31,6 @@ private:
 	SCENE_ID SceneID;
 
 	c_Title cTitle;
+	c_Play cPlay;
+	c_Result cResult;
 };

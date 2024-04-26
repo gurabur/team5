@@ -17,4 +17,5 @@ public:
 
 private:
 	int TitleImgHndl;	// タイトル画像用のハンドル << 他に映したいものがあったら適宜増やしてください
-	bool BreakFlg;		// このフラグがtrueになると、Step処理を終了させる
+	bool BreakFlg;		// このフラグがtrueになるとStep処理を終了させる
+};

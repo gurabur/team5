@@ -51,3 +51,23 @@ VECTOR MyMath::VecScale(VECTOR vec, float scale)
 
 	return _Vec;
 }
+
+float MyMath::CreateInPro2D(VECTOR vec1, VECTOR vec2)
+{
+	return vec1.x * vec2.x + vec1.y * vec2.y;
+}
+
+float MyMath::AngleOfVec(VECTOR vec1, VECTOR vec2) {
+	float vec1Length = VecLong(vec1);
+	float vec2Length = VecLong(vec2);
+
+	float vecInPro = CreateInPro2D(vec1, vec2);
+
+	float sita = vecInPro / (vec1Length * vec2Length);
+
+	sita = acosf(sita);
+
+	
+
+	return sita;
+}
