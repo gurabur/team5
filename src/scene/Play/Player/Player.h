@@ -22,10 +22,11 @@ public:
 	void Exit();
 
 private:
-	VECTOR v_CMouseBuf;	//マウスの座標バッファ
-	VECTOR v_NMouseBuf;	//マウスの座標バッファ
+	VECTOR v_CMouseBuf;	//マウスの座標バッファ(クリック地点)
+	VECTOR v_NMouseBuf;	//マウスの座標バッファ(リリース地点)
 	VECTOR m_v_CPos;	// 現在の座標
 	VECTOR m_v_NPos;	// 次の座標
+	VECTOR m_vSpeed;	// パワーと重力から計算された移動方向
 	VECTOR m_vPower;	// パワー保存用 << 射出するベクトル
 	float m_f_SizePow;	//パワーの大きさ
 	float m_f_RadPow;	//パワーの角度
@@ -38,4 +39,6 @@ private:
 	int MousePosY;
 	int Mouse_CLog;	//ボタンが押されたか離されたかの情報を保存するcurrent
 	int Mouse_NLog;	//ボタンが押されたか離されたかの情報を保存するnext
+
+	bool RandingFlg;	//設置フラグ
 };

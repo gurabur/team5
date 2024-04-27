@@ -6,6 +6,7 @@ c_Player::c_Player()
 	v_NMouseBuf = VGet(0.0f, 0.0f, 0.0f);
 	m_v_CPos = VGet(0.0f, 0.0f, 0.0f);
 	m_v_NPos = VGet(0.0f, 0.0f, 0.0f);
+	m_vSpeed = VGet(0.0f, 0.0f, 0.0f);
 	m_vPower = VGet(0.0f, 0.0f, 0.0f);
 	m_f_SizePow = 0.0f;//パワーの大きさ
 	m_f_RadPow = 0.0f;	//パワーの角度
@@ -18,6 +19,8 @@ c_Player::c_Player()
 	MousePosY = 0;
 	Mouse_CLog = 1;	//ボタンが押されたか離されたかの情報を保存するcurrent
 	Mouse_NLog = 1;	//ボタンが押されたか離されたかの情報を保存するnext
+
+	RandingFlg = false;
 }
 c_Player::~c_Player()
 {
@@ -33,14 +36,16 @@ void c_Player::Init()
 }
 void c_Player::Step()
 {
+	// マウス関連--------------------------------------
+
 	if (GetMouseInputLog2(&MouseButton, &MousePosX, &MousePosY, &Mouse_NLog,true) == 0) {
-		if (Mouse_NLog == MOUSE_INPUT_LOG_DOWN,Mouse_CLog == MOUSE_INPUT_LOG_UP)
-		{
+		if (Mouse_NLog == MOUSE_INPUT_LOG_DOWN,Mouse_CLog == MOUSE_INPUT_LOG_UP) {			//クリックした瞬間の座標を保存
 			v_CMouseBuf.x = (float)MousePosX;
 			v_CMouseBuf.y = (float)MousePosY;
 		}
-		else if (Mouse_NLog == MOUSE_INPUT_LOG_UP, Mouse_CLog == MOUSE_INPUT_LOG_DOWN) {
-			
+		else if (Mouse_NLog == MOUSE_INPUT_LOG_UP, Mouse_CLog == MOUSE_INPUT_LOG_DOWN) {	//リリースした瞬間プレイヤーの移動方向を決める
+			m_vSpeed = MyMath::VecScale(m_vPower, m_f_SizePow/10);	//正規化されたパワーベクトルに、修正されたパワースカラーを乗算
+			m_vSpeed = VGet(-m_vSpeed.x, -m_vSpeed.y, 0.0f);	//パワーベクトルはクリック地点からリリース地点のベクトルなので、ここでm_vSpeedを反転させることでスリングショットを実現する
 		}
 	}
 
@@ -53,14 +58,40 @@ void c_Player::Step()
 	if (m_f_SizePow >= MAX_SHOT_POWER) {
 		m_f_SizePow = MAX_SHOT_POWER;								//上限値の突破を抑制
 	}
-	m_vPower = MyMath::VecNormalize(m_vPower);						//パワーを正規化
+	m_vPower = MyMath::VecNormalize(m_vPower);						//パワーを正規化 << m_vPowerは最終的にここに帰結する
 	m_f_RadPow = acosf(m_vPower.x);									//パワーの角度を取得
 	if (asinf(m_vPower.y) <= 0) {
 		m_f_RadPow = -m_f_RadPow;
 	}
+	if (Mouse_NLog == MOUSE_INPUT_LOG_DOWN, Mouse_CLog == MOUSE_INPUT_LOG_DOWN) { Sleep(20); }
+	//-------------------------------------------------
 
 
-	Mouse_CLog = Mouse_NLog;//currentとnextを更新
+	// PLの移動関連------------------------------------
+	
+	//	Y軸関連の計算
+	RandingFlg = false;	//一旦接地フラグをfalseにする
+
+	m_v_NPos.y += m_vSpeed.y;	//Y座標を計算
+
+	if (m_v_NPos.y + PLAYER_RECT >= FIELD_HEIGHT){	//接地判定をとる
+		RandingFlg = true;
+		m_vSpeed = VGet(0.0f, 0.0f, 0.0f);
+		m_v_NPos.y = FIELD_HEIGHT - PLAYER_RECT;	//プレイヤーをめり込まない位置に調整
+	}
+	m_vSpeed.y += GRAVITY_POWER;	//上に向かう力を重力で抑制
+
+	//	X軸関連の計算
+
+	if (!RandingFlg) {	// 接地中なら移動を行わない
+		m_v_NPos.x += m_vSpeed.x;	//X座標を計算
+	}
+
+	//-------------------------------------------------
+
+	//currentとnextを更新
+	Mouse_CLog = Mouse_NLog;
+	m_v_CPos = m_v_NPos;
 }
 void c_Player::Draw()
 {

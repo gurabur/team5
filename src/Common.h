@@ -6,6 +6,7 @@
 #include "Input/Input.h"			// キーボード入力ができる
 
 // define
-#define	SCREEN_SIZE_X	640	// X方向の画面サイズを指定
-#define	SCREEN_SIZE_Y	480	// Y方向の画面サイズを指定
-#define GRAVITY_POWER	2	// 重力の強さ
+#define	SCREEN_SIZE_X	1080	// X方向の画面サイズを指定
+#define	SCREEN_SIZE_Y	720	// Y方向の画面サイズを指定
+#define GRAVITY_POWER	0.2f	// 重力の強さ
+#define FIELD_HEIGHT	650	//地面とするY座標
