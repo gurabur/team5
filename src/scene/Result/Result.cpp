@@ -22,7 +22,7 @@ void c_Result::Step()
 }
 void c_Result::Draw()
 {
-	// << •`‰æ•û–@‚Í‚¨”C‚¹‚µ‚Ü‚·
+	DrawGraph(0,0,ResultImgHndl,true); // << •`‰æ•û–@‚Í‚¨”C‚¹‚µ‚Ü‚·
 }
 void c_Result::Exit()
 {
