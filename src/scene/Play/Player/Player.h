@@ -17,10 +17,17 @@ public:
 	~c_Player();
 
 	void Init();
-	void Step();
+	void Step(float x, float y, float w, float h,bool hit);
 	void Draw();
 	void Exit();
 
+	inline float Getm_f_SizePow() { return m_f_SizePow; }//プレイヤーのパワーを取得する
+
+	inline float Getm_PosX() { return m_v_CPos.x; }
+	inline float Getm_PosY() { return m_v_CPos.y; }
+
+	inline void Turnm_SpeedX() { m_vSpeed.x = -m_vSpeed.x; }
+	inline void Turnm_SpeedY() { m_vSpeed.y = -m_vSpeed.y; }
 private:
 	VECTOR v_CMouseBuf;	//マウスの座標バッファ(クリック地点)
 	VECTOR v_NMouseBuf;	//マウスの座標バッファ(リリース地点)

@@ -32,9 +32,9 @@ void c_Player::Init()
 	m_v_CPos = DEFAULT_PLAYER_POS;
 	m_v_NPos = DEFAULT_PLAYER_POS;
 	PlayerImgHndl = LoadGraph("data/PlayScene/Player/tekitou.png");
-	ArrowImgHndl = LoadGraph("data/PlayScene/arrow.png");
+	ArrowImgHndl = LoadGraph("data/PlayScene/_arrow.png");
 }
-void c_Player::Step()
+void c_Player::Step(float x, float y, float w, float h, bool hit)
 {
 	// マウス関連--------------------------------------
 
@@ -68,7 +68,11 @@ void c_Player::Step()
 
 
 	// PLの移動関連------------------------------------
-	
+	if (hit == true && m_v_NPos.x + PLAYER_SIZE_X > x)
+	{
+		m_v_NPos.x = x - PLAYER_SIZE_X;
+		Turnm_SpeedX();
+	}
 	//	Y軸関連の計算
 	RandingFlg = false;	//一旦接地フラグをfalseにする
 
@@ -79,12 +83,28 @@ void c_Player::Step()
 		m_vSpeed = VGet(0.0f, 0.0f, 0.0f);
 		m_v_NPos.y = FIELD_HEIGHT - PLAYER_RECT;	//プレイヤーをめり込まない位置に調整
 	}
+
+	if (hit == true && m_v_NPos.y + PLAYER_SIZE_Y > y && m_v_NPos.x + PLAYER_SIZE_X > x)
+	{
+		m_v_NPos.y = y - PLAYER_SIZE_Y;
+		Turnm_SpeedY();
+	}
 	m_vSpeed.y += GRAVITY_POWER;	//上に向かう力を重力で抑制
 
 	//	X軸関連の計算
 
 	if (!RandingFlg) {	// 接地中なら移動を行わない
 		m_v_NPos.x += m_vSpeed.x;	//X座標を計算
+	}
+	
+
+	if (m_v_NPos.x < 0) {
+		m_v_NPos.x = 0;
+		Turnm_SpeedX();
+	}
+	if (m_v_NPos.x > SCREEN_SIZE_X) {
+		m_v_NPos.x = SCREEN_SIZE_X;
+		Turnm_SpeedX();
 	}
 
 	//-------------------------------------------------
@@ -99,7 +119,7 @@ void c_Player::Draw()
 	DrawRotaGraph(m_v_CPos.x, m_v_CPos.y, 1.0, 0.0, PlayerImgHndl, true);
 	DrawLine(v_CMouseBuf.x, v_CMouseBuf.y, v_NMouseBuf.x, v_NMouseBuf.y, GetColor(127, 127, 255),4);
 	if (Mouse_NLog == MOUSE_INPUT_LOG_DOWN, Mouse_CLog == MOUSE_INPUT_LOG_DOWN) {
-		DrawRotaGraph(m_v_CPos.x, m_v_CPos.y, 0.002 * m_f_SizePow,m_f_RadPow, ArrowImgHndl, true);
+		DrawRotaGraph(m_v_CPos.x, m_v_CPos.y, 0.01 * m_f_SizePow,m_f_RadPow, ArrowImgHndl, true);
 	}
 }
 void c_Player::Exit()

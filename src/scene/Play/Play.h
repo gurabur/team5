@@ -2,6 +2,9 @@
 #include "DxLib.h"
 #include "../../Common.h"
 #include "Player/Player.h"
+#include "Enemy/Enemy.h"
+
+#define STAGE_MAX_NUM 3
 
 class c_Play
 {
@@ -17,9 +20,10 @@ public:
 	inline bool GetBreakFlg() { return BreakFlg; }
 
 private:
-	int StageIndex;	//ステージを保存
-	bool PlayerTurn;//trueならプレイヤーのターン
+	int StageIndex;	//現在のステージを保存
+	int PlayerTurn;//プレイヤーのターン
 	c_Player cPlayer;
+	c_Enemy cEnemy;
 
 	bool BreakFlg;	// このフラグがtrueになると、Step処理を終了させる
 };
