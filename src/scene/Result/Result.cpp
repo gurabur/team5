@@ -12,7 +12,7 @@ c_Result::~c_Result()
 void c_Result::Init()
 {
 	BreakFlg = false;
-	ResultImgHndl = LoadGraph("data/ResultScene/TentativeClearBG");
+	ResultImgHndl = LoadGraph("data/ResultScene/Clear.png");
 }
 void c_Result::Step()
 {
@@ -22,7 +22,7 @@ void c_Result::Step()
 }
 void c_Result::Draw()
 {
-	DrawGraph(0,0,ResultImgHndl,true); // << •`‰æ•û–@‚Í‚¨”C‚¹‚µ‚Ü‚·
+	//DrawGraph(0,0,ResultImgHndl,true); // << •`‰æ•û–@‚Í‚¨”C‚¹‚µ‚Ü‚·
 }
 void c_Result::Exit()
 {
