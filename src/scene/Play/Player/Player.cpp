@@ -31,7 +31,7 @@ void c_Player::Init()
 {
 	m_v_CPos = DEFAULT_PLAYER_POS;
 	m_v_NPos = DEFAULT_PLAYER_POS;
-	PlayerImgHndl = LoadGraph("data/PlayScene/Player/tekitou.png");
+	PlayerImgHndl = LoadGraph("data/PlayScene/Player/Player.png");
 	ArrowImgHndl = LoadGraph("data/PlayScene/_arrow.png");
 }
 void c_Player::Step(float x, float y, float w, float h, bool hit)
