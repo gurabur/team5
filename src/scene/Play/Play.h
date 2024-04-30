@@ -24,6 +24,8 @@ private:
 	int PlayerTurn;//プレイヤーのターン
 	c_Player cPlayer;
 	c_Enemy cEnemy;
+	int slowcount;
 
+	int BackGroundHndl;
 	bool BreakFlg;	// このフラグがtrueになると、Step処理を終了させる
 };

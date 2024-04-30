@@ -10,7 +10,7 @@ c_SceneManager::~c_SceneManager()
 }
 void c_SceneManager::Init()
 {
-	SceneID = SCENE_INIT_PLAY;	//起動後最初に実行するシーンはここを変更 << focus
+	SceneID = SCENE_INIT_TITLE;	//起動後最初に実行するシーンはここを変更 << focus
 }
 void c_SceneManager::Step()
 {

@@ -24,7 +24,11 @@ public:
 protected:
 	VECTOR m_v_CPos;	// åªç›ÇÃç¿ïW
 	int EnemyImgHndl;
-	int m_HitPoint;
+	float m_HitPoint;
+	float m_MaxHP;
+	int HPboxPosX;
+	int HPboxPosY;
+	float HPboxLength;
 	bool DamageReaction;
 	bool IsUseFlg;
 };
