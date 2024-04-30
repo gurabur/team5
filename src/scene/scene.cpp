@@ -75,7 +75,7 @@ void c_SceneManager::Step()
 
 		cResult.Step();
 		cResult.Draw();
-		if (cPlay.GetBreakFlg()) {
+		if (cResult.GetBreakFlg()) {
 			SceneID = SCENE_FIN_RESULT;
 		}
 

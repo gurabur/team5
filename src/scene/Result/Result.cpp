@@ -3,6 +3,7 @@
 c_Result::c_Result()
 {
 	ResultImgHndl = -1;//‰Šú‰»
+	BreakFlg = false;
 }
 c_Result::~c_Result()
 {
@@ -22,7 +23,7 @@ void c_Result::Step()
 }
 void c_Result::Draw()
 {
-	//DrawGraph(0,0,ResultImgHndl,true); // << •`‰æ•û–@‚Í‚¨”C‚¹‚µ‚Ü‚·
+	DrawGraph(0,0,ResultImgHndl,true); // << •`‰æ•û–@‚Í‚¨”C‚¹‚µ‚Ü‚·
 }
 void c_Result::Exit()
 {

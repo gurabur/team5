@@ -44,7 +44,7 @@ void c_Enemy::Step(float x, float y, float w, float h,float p)
 }
 void c_Enemy::Draw()
 {
-	DrawGraph(m_v_CPos.x, m_v_CPos.y, EnemyImgHndl, false);
+	DrawGraph(m_v_CPos.x, m_v_CPos.y, EnemyImgHndl, true);
 	DrawLine(HPboxPosX, HPboxPosY, HPboxPosX + 200, HPboxPosY, GetColor(255, 64, 64), 64);
 	DrawLine(HPboxPosX, HPboxPosY, HPboxPosX + HPboxLength, HPboxPosY, GetColor(64, 255, 64), 64);
 }
