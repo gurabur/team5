@@ -21,8 +21,8 @@ void c_Enemy::Init()
 {
 	m_v_CPos = VGet(550.0f, 250.0f, 0.0f);
 	EnemyImgHndl = LoadGraph("data/PlayScene/Enemy/kamakiri.png");
-	m_HitPoint = 600;
-	m_MaxHP = 600;
+	m_HitPoint = 2500; //“G‚Ì‘Ì—Í
+	m_MaxHP = 2500;
 	HPboxPosX = 600;
 	HPboxPosY = 100;
 	HPboxLength = 200;
